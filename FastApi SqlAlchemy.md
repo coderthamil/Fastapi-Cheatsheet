@@ -53,9 +53,11 @@ def get_db():
         yield db
     finally:
         db.close()
+```
 
 
 🗄️ ORM Model Template (app/models/<model>.py)
+```
 import uuid
 from uuid import UUID
 from sqlalchemy import Column, String, Integer
