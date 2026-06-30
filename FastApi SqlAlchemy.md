@@ -158,7 +158,6 @@ def delete_<object>(id: UUID, db: Session = Depends(get_db)):
     db.commit()
     return {"detail": "<object> deleted successfully"}
    ``` 
-==================================================================
 📝 Key Notes
 🗄️ SQLAlchemy uses db.query(Model) for queries.
 
