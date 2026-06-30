@@ -7,8 +7,7 @@
   <!-- SQLAlchemy -->
   <img src="https://www.sqlalchemy.org/img/sqla_logo.png" alt="SQLAlchemy" width="120"/>
   
-  <!-- SQLModel (hosted on GitHub repo) -->
-  <img src="https://raw.githubusercontent.com/tiangolo/sqlmodel/main/docs/img/logo.png" alt="SQLModel" width="120"/>
+ 
   
   <!-- Uvicorn (community-hosted logo) -->
   <img src="https://raw.githubusercontent.com/encode/uvicorn/master/docs/uvicorn.png" alt="Uvicorn" width="120"/>
