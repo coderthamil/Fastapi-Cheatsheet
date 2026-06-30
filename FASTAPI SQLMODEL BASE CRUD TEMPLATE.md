@@ -1,10 +1,41 @@
-# ////////////////////////////////////////////////////////
 # 🚀 FASTAPI + SQLMODEL PREMIUM CRUD CHEATSHEET (.env READY)
-# ////////////////////////////////////////////////////////
 
-==========================================================
-1️⃣ DATABASE CONNECTION (app/database/database.py)
-==========================================================
+<p align="center">
+  <img src="https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png" alt="FastAPI" width="120"/>
+ 
+  <img src="https://raw.githubusercontent.com/encode/uvicorn/master/docs/uvicorn.png" alt="Uvicorn" width="120"/>
+</p>
+
+<p align="center">
+  <b>Production-ready CRUD scaffold for FastAPI with SQLModel ORM</b>
+</p>
+
+---
+
+## ✨ Features
+- ⚡ **FastAPI** → High-performance Python web framework  
+- 🧩 **SQLModel ORM** → Built on SQLAlchemy + Pydantic  
+- 🔑 **Environment-based configuration (.env)**  
+- 📦 **Reusable CRUD routes**  
+- 🔄 **Alembic migrations compatible**  
+
+---
+
+## 📂 Project Structure
+```
+📁 app
+├── 📁 models        # SQLModel models
+├── 📁 schemas       # SQLModel schemas
+├── 📁 routers       # API endpoints (CRUD)
+├── 📁 database.py   # DB connection/session
+├── main.py          # FastAPI entrypoint
+└── .env             # Environment variables
+```
+
+---
+
+## ⚡ Database Connection (`app/database/database.py`)
+```python
 from sqlmodel import SQLModel, create_engine, Session
 import os
 from dotenv import load_dotenv
@@ -21,16 +52,17 @@ def get_session():
 
 def init_db():
     SQLModel.metadata.create_all(engine)
-
+```
+```
 # Example .env file:
 # DATABASE_URL=postgresql+psycopg2://postgres:password@localhost:5432/screenly
 # SECRET_KEY=supersecretjwtkey
 # ALGORITHM=HS256
 # ACCESS_TOKEN_EXPIRE_MINUTES=30
+```
+🗄️ Model Template (app/models/<model>.py)
+```
 
-==========================================================
-2️⃣ MODEL TEMPLATE (app/models/<model>.py)
-==========================================================
 import uuid
 from uuid import UUID
 from sqlmodel import SQLModel, Field
@@ -43,10 +75,9 @@ class <ModelName>(SQLModel, table=True):
     field2: Optional[str] = None
     field3: Optional[int] = None
     created_at: datetime = Field(default_factory=datetime.utcnow)
-
-==========================================================
-3️⃣ SCHEMA TEMPLATE (app/schemas/<model>.py)
-==========================================================
+```
+📦 Schema Template (app/schemas/<model>.py)
+```
 from uuid import UUID
 from sqlmodel import SQLModel
 from typing import Optional
@@ -71,10 +102,9 @@ class <ModelName>Update(SQLModel):
     field1: Optional[str] = None
     field2: Optional[str] = None
     field3: Optional[int] = None
-
-==========================================================
-4️⃣ CRUD ROUTES TEMPLATE (app/routers/<model>.py)
-==========================================================
+```
+⚡ CRUD Routes Template (app/routers/<model>.py)
+```
 from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session, select
 from uuid import UUID
@@ -128,19 +158,28 @@ def delete_<object>(id: UUID, session: Session = Depends(get_session)):
     session.delete(obj)
     session.commit()
     return {"detail": "<object> deleted successfully"}
+```
+📝 Key Notes
+🗄️ .env file keeps secrets safe (DB URL, JWT keys).
 
-==========================================================
-5️⃣ KEY NOTES
-==========================================================
-- .env file keeps secrets safe (DB URL, JWT keys).
-- .dict() → converts schema to dictionary for unpacking.
-- .dict(exclude_unset=True) → only updates fields provided in request.
-- from_orm() → converts schema into ORM model directly.
-- orm_mode = True → ensures SQLModel objects can be returned as responses.
+⚙️ .dict() → converts schema to dictionary for unpacking.
 
-==========================================================
-🎯 HOW TO USE
-==========================================================
-- Replace <ModelName> → e.g., Movie, User, Booking.
-- Replace <endpoint> → e.g., movies, users, bookings.
-- Replace <object> → lowercase singular (e.g., movie, user).
+🔄 .dict(exclude_unset=True) → only updates fields provided in request.
+
+🧩 from_orm() → converts schema into ORM model directly.
+
+✅ orm_mode = True → ensures SQLModel objects can be returned as responses.
+
+🎯 How to Use
+Replace <ModelName> → e.g., Movie, User, Booking.
+
+Replace <endpoint> → e.g., movies, users, bookings.
+
+Replace <object> → lowercase singular (e.g., movie, user).
+
+
+---
+
+This is now a **single, copy‑paste ready `README.md` file** with premium design for FastAPI + SQLModel CRUD. It mirrors the SQLAlchemy version you had, so you can keep both side‑by‑side in your repo.
+
+
